@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskList from '../components/TaskList';
+import NewTask from '../components/NewTask';
 import './App.css';
 
 class App extends Component {
@@ -7,6 +8,7 @@ class App extends Component {
     super();
 
     this.state = {
+      inputValue: '',
       tasks: [
         {
           id: 1,
@@ -27,6 +29,21 @@ class App extends Component {
       ]
     };
   }
+
+  addTask = () => {
+    this.setState({
+      tasks: [
+        ...this.state.tasks,
+        {id: this.state.tasks.length + 1, task: this.state.inputValue}
+      ],
+      inputValue: ''
+    });
+  }
+
+  inputChange = (text) => {
+    this.setState({ inputValue: text });
+  }
+
   render() {
     return (
       <div className="App">
@@ -37,6 +54,11 @@ class App extends Component {
           To get started, add a chore or a goal.
         </p>
         <div className="mainSection">
+          <NewTask 
+            handleInputChange={(text) => {this.inputChange(text)}}
+            handleAddTask={() => {this.addTask()}}
+            inputValue={this.state.inputValue}
+          />
           <TaskList tasks={this.state.tasks} />
         </div>
       </div>

@@ -4,7 +4,7 @@ export default function Task(props) {
 
     return(
         <div>
-            <p>{props.task}</p>
+            <p>{props.id}. {props.task}</p>
         </div>
     );
 }
